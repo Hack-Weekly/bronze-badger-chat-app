@@ -5,7 +5,7 @@ import {LocalAuthGuard} from '../../auth/guard/local.guard';
 export class AuthController {
     constructor() {}
 
-    @Get()
+    @Get('login')
     @UseGuards(LocalAuthGuard)
     login() {
         // TODO return auth token
