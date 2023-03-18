@@ -1,5 +1,4 @@
 .app {
-  height: 100vh;
   background: url('./assets/bckg-lg.svg') no-repeat center center fixed;
   background-size: cover;
 }
@@ -9,6 +8,11 @@
     background: url('./assets/bckg-sm.svg') no-repeat center center fixed;
     background-size: cover;
   }
+}
+
+.card-left img {
+  max-width: 200px;
+  margin-bottom: 2.5rem;
 }
 
 .card-right {
