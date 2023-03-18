@@ -1,0 +1,18 @@
+.app {
+  height: 100vh;
+  background: url('./assets/bckg-lg.svg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .app {
+    background: url('./assets/bckg-sm.svg') no-repeat center center fixed;
+    background-size: cover;
+  }
+}
+
+.card-right {
+  background: url('./assets/form-bckg.svg') bottom left no-repeat,
+    url('./assets/form-bckg-2.svg') top right no-repeat;
+  background-size: 175px 225px;
+}

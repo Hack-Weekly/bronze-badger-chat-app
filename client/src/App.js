@@ -1,11 +1,12 @@
 import React from 'react';
+import { Register } from './pages';
 
 import './App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <h1 className='text-3xl font-bold underline'>bronze-badger-chat-app</h1>
+    <div className='app'>
+      <Register />
     </div>
   );
 }
