@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Card } from '../../components';
-import { restFormProps, inputItems } from './registerFormProps';
+import { restFormProps, inputItems } from './loginFormProps';
 
-export const Register = () => {
+export const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -13,7 +13,7 @@ export const Register = () => {
         <Form
           headerText={
             <>
-              Create a new account <span className='accent'>.</span>
+              Welcome back <span className='accent'>.</span>
             </>
           }
           inputItems={inputItems}

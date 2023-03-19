@@ -5,9 +5,9 @@ import { Input } from '../Input';
 import { Button } from '../Button';
 import { primaryButtonClass } from '../../res/styles';
 
-export const Form = ({ inputItems = [], headerText = '', buttonText = '', cta }) => {
+export const Form = ({ inputItems = [], headerText = '', buttonText = '', cta, handleSubmit }) => {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1 className='mb-12'>{headerText}</h1>
       {inputItems.map((item) => {
         return (
@@ -47,4 +47,5 @@ Form.propTypes = {
   headerText: PropTypes.node,
   buttonText: PropTypes.string,
   cta: PropTypes.object,
+  handleSubmit: PropTypes.func,
 };
