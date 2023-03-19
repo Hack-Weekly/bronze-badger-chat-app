@@ -1,15 +1,15 @@
 import {Module} from '@nestjs/common';
 import {RouterModule, Routes} from '@nestjs/core';
-import {AuthModule} from './auth/auth.module';
+import {AuthControllerModule} from './auth/authController.module';
 
 const routes: Routes = [
     {
-        path: '/auth',
-        module: AuthModule,
+        path: '/',
+        module: AuthControllerModule,
     },
 ];
 
 @Module({
-    imports: [RouterModule.register(routes)],
+    imports: [RouterModule.register(routes), AuthControllerModule],
 })
 export class ApiModule {}

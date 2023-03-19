@@ -1,41 +1,109 @@
-import {Body, Controller, DefaultValuePipe, Delete, Get, Param, Post, Query, UseGuards} from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    DefaultValuePipe,
+    Delete,
+    Get,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Post,
+    Query,
+    UseGuards
+} from '@nestjs/common';
 import {JwtAuthGuard} from '../../auth/guard/jwt.guard';
 import {CreateUserDto} from '../../auth/domain/dto/create-user-dto';
+import {
+    ApiBadRequestResponse,
+    ApiBearerAuth,
+    ApiCreatedResponse,
+    ApiNoContentResponse,
+    ApiOkResponse,
+    ApiParam,
+    ApiQuery,
+    ApiTags,
+    ApiUnauthorizedResponse
+} from "@nestjs/swagger";
+import {UsersService} from "../../auth/service/user.service";
+import {CurrentUser} from "../../auth/util/currentUser.decorator";
+import {User} from "../../auth/domain/entity/user";
+import {Pageable} from "../../util/pageable";
+import {ValidationErrorResponse} from "../../util/validationErrorResponse";
+import {Types} from "mongoose";
+import {ParseObjectIdPipe} from "../../validator/parseObjectId.pipe";
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
-    constructor() {}
+    constructor(private userService: UsersService) {}
 
+    @ApiBearerAuth()
+    @ApiQuery({
+        name: "page",
+        required: false,
+    })
+    @ApiQuery({
+        name: "size",
+        required: false,
+    })
+    @ApiQuery({
+        name: "search",
+        required: false,
+    })
     @Get()
+    @ApiOkResponse({type: Pageable})
+    @ApiUnauthorizedResponse()
     @UseGuards(JwtAuthGuard)
-    getUserPage(
+    async getUserPage(
         @Query('page', new DefaultValuePipe(0)) page: number,
-        @Query('size', new DefaultValuePipe(0)) size: number,
-        @Query('serch', new DefaultValuePipe('')) serchParam: string
+        @Query('size', new DefaultValuePipe(10)) size: number,
+        @Query('search', new DefaultValuePipe('')) searchParam: string
     ) {
-        // TODO return user page with search param
+        return await this.userService.getUserPage(page, size, searchParam)
     }
 
-    @Get('/:id')
-    @UseGuards(JwtAuthGuard)
-    getUser(@Param('id') userId: string) {
-        // TODO return user
-    }
 
+    @ApiBearerAuth()
+    @ApiOkResponse({
+        type: User,
+    })
+    @ApiUnauthorizedResponse()
     @Get('current')
     @UseGuards(JwtAuthGuard)
-    getCurrentUser() {
-        // TODO return current user - get user from req object (make user decorator to make it cleaner)
+    async getCurrentUser(@CurrentUser() current) {
+        return await this.userService.findUserById(current.userId)
     }
 
+    @ApiCreatedResponse()
+    @ApiBadRequestResponse({
+        type: ValidationErrorResponse
+    })
     @Post()
-    createUser(@Body() user: CreateUserDto) {
-        // TODO create/register user - finish creating CreateUserDto class - add fields and validators
+    async createUser(@Body() user: CreateUserDto) {
+        await this.userService.createUser(user);
     }
 
+    @ApiBearerAuth()
     @Delete()
+    @ApiUnauthorizedResponse()
+    @ApiNoContentResponse()
     @UseGuards(JwtAuthGuard)
-    selfDelete() {
-        // todo soft delete request maker (available from req token)
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async selfDelete(@CurrentUser() user) {
+        await this.userService.deleteUser(user.userId);
     }
+
+    @ApiBearerAuth()
+    @ApiOkResponse({
+        type: User,
+    })
+    @ApiBadRequestResponse()
+    @ApiUnauthorizedResponse()
+    @ApiParam({name: 'id', type: String})
+    @Get('/:id')
+    @UseGuards(JwtAuthGuard)
+    async getUser(@Param('id', ParseObjectIdPipe) id: Types.ObjectId) {
+        return await this.userService.findUserById(id);
+     }
+
 }
