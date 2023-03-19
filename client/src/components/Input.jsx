@@ -7,16 +7,16 @@ export const Input = ({ iconLeft, iconRight, type, placeholder, id, name }) => {
       <label htmlFor={id} className='sr-only'>
         {placeholder}
       </label>
-      <div className='flex items-center border-2 py-2 px-3 rounded-xl mb-4 hover:border-indigo-400 transition ease-in-out'>
-        {iconLeft ?? ''}
+      <div className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl mb-4 hover:border-indigo-400 transition ease-in-out'>
+        {iconLeft}
         <input
-          className='pl-2 outline-none border-none '
+          className='w-full pl-2 outline-none border-none '
           type={type}
           id={id}
           name={name}
           placeholder={placeholder}
         />
-        {iconRight ?? ''}
+        {iconRight}
       </div>
     </>
   );

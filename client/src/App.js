@@ -1,5 +1,5 @@
 import React from 'react';
-import { Register } from './pages';
+import { Register } from './pages/Register/Register';
 
 import './App.css';
 

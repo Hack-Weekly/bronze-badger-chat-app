@@ -1,22 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap');
+
 .app {
-  background: url('./assets/bckg-lg.svg') no-repeat center center fixed;
+  background: url('./assets/bckg-sm.svg') no-repeat center center fixed;
   background-size: cover;
 }
 
-@media screen and (max-width: 600px) {
+.card {
+  height: 645px;
+}
+
+.card-left h1 {
+  font-family: 'Rubik', sans-serif;
+  font-size: 22px;
+}
+
+.slide {
+  background: url('./assets/form-bg-1.svg') bottom left no-repeat,
+    url('./assets/form-bg-2.svg') top right no-repeat;
+  background-size: 175px 225px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Rubik', sans-serif;
+  color: #474bff;
+  font-size: 46px;
+}
+
+.slide-2 {
+  background: url('./assets/form-bg-3.svg') bottom left no-repeat,
+    url('./assets/form-bg-4.svg') top right no-repeat;
+  background-size: 175px 225px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Rubik', sans-serif;
+  color: #474bff;
+  font-size: 46px;
+}
+
+.slide-3 {
+  background: url('./assets/form-bg-5.svg') bottom left no-repeat,
+    url('./assets/form-bg-6.svg') top right no-repeat;
+  background-size: 175px 225px;
+  width: 100%;
+  height: 100%;
+  font-family: 'Rubik', sans-serif;
+  color: #474bff;
+  font-size: 46px;
+}
+
+.accent {
+  color: #474bff;
+  font-size: 46px;
+}
+
+@media screen and (min-width: 600px) {
   .app {
-    background: url('./assets/bckg-sm.svg') no-repeat center center fixed;
+    background: url('./assets/bckg-lg.svg') no-repeat center center fixed;
     background-size: cover;
   }
-}
 
-.card-left img {
-  max-width: 200px;
-  margin-bottom: 2.5rem;
-}
-
-.card-right {
-  background: url('./assets/form-bckg.svg') bottom left no-repeat,
-    url('./assets/form-bckg-2.svg') top right no-repeat;
-  background-size: 175px 225px;
+  .card-left h1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 26px;
+  }
 }
