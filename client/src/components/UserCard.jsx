@@ -12,7 +12,7 @@ export const UserCard = () => {
           <span className='text-sm'>Lorem ipsum dolor sit amet,</span>
         </div>
       </div>
-      <span className='absolute right-0 top-1 text-xs'>05:15</span>
+      <span className='absolute right-2 top-1 text-xs'>05:15</span>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Input = ({ icons, type, placeholder, id, name }) => {
+export const Input = ({ icons, type, placeholder, id, name, value, onChange }) => {
   return (
     <>
       <label htmlFor={id} className='sr-only'>
@@ -15,6 +15,9 @@ export const Input = ({ icons, type, placeholder, id, name }) => {
           id={id}
           name={name}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required
         />
         {icons.right}
       </div>
@@ -28,4 +31,6 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };

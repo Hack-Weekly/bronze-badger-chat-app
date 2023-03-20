@@ -20,6 +20,7 @@ export const inputsData = [
     icons: {
       left: <FingerprintIcon {...iconsCustomStyle} />,
     },
+    name: 'userName',
   },
   {
     type: 'email',
@@ -29,6 +30,7 @@ export const inputsData = [
     icons: {
       left: <AlternateEmailIcon {...iconsCustomStyle} />,
     },
+    name: 'email',
   },
   {
     type: 'password',
@@ -44,6 +46,7 @@ export const inputsData = [
         </IconButton>
       ),
     },
+    name: 'password',
   },
   {
     type: 'password',
@@ -58,5 +61,6 @@ export const inputsData = [
         </IconButton>
       ),
     },
+    name: 'confirmPassword',
   },
 ];

@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 import { Input } from '../Input';
 import { Button } from '../Button';
 import { primaryButtonClass } from 'constants/styles';
+import { useForm } from 'hooks/useForm';
 
 export const Form = ({ inputsData = [], headerText = '', buttonText = '', cta, handleSubmit }) => {
+  const { values, onChange } = useForm();
+
   return (
     <form onSubmit={handleSubmit}>
       <h1 className='mb-12'>{headerText}</h1>
       {inputsData.map((item) => {
-        return <Input key={item.id} {...item} />;
+        return <Input key={item.id} value={values[item.name]} onChange={onChange} {...item} />;
       })}
       <Button type='submit' {...primaryButtonClass}>
         {buttonText}
