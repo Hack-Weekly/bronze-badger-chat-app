@@ -5,8 +5,7 @@ import { Register } from './pages/Register/Register';
 import { Login } from './pages/Login/Login';
 import ErrorPage from './pages/404';
 
-// import App from './App';
-
+import './App.css';
 import './index.css';
 
 const router = createBrowserRouter([
