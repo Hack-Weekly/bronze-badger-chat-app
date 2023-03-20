@@ -1,14 +1,24 @@
 import React from 'react';
-import { Register } from 'pages';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Register, Login, ErrorPage } from 'pages';
 
 import './App.css';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Register />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+]);
+
 function App() {
-  return (
-    <>
-      <Register />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
