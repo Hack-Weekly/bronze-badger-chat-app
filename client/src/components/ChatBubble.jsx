@@ -1,6 +1,5 @@
 import React from 'react';
-import DoneIcon from '@mui/icons-material/Done';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { DoneIcon, DoneAllIcon } from 'constants/icons';
 
 export const ChatBubble = ({ msgType, text, timestamp, rcvd, consecutive }) => {
   return (

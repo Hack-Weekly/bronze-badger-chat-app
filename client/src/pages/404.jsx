@@ -1,6 +1,6 @@
 import { Link, useRouteError } from 'react-router-dom';
-import { Button } from '../components';
-import { primaryButtonClass } from '../res/styles';
+import { Button } from 'components';
+import { primaryButtonClass } from 'constants/styles';
 import React from 'react';
 
 export default function ErrorPage() {
