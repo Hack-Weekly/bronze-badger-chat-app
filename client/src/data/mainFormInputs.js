@@ -9,7 +9,7 @@ import {
   RestartAltIcon,
   RemoveRedEyeIcon,
 } from '../constants/icons';
-
+//TODO: check the actual name of the fields from the swagger.
 export const inputsData = [
   {
     type: 'text',
