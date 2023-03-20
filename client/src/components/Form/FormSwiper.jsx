@@ -1,6 +1,5 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
-
 import { Autoplay, Pagination } from 'swiper';
 import { Swiper } from 'swiper/react';
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Login } from './pages/Login/Login';
+import { Register } from 'pages';
 
 import './App.css';
 
 function App() {
   return (
     <>
-      <Login />
+      <Register />
     </>
   );
 }

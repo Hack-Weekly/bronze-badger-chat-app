@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Card } from '../../components';
-import { restFormProps, inputItems } from './loginFormProps';
+import { Form, Card } from 'components';
+import { inputsData, loginFormProps } from 'data';
 
 export const Login = () => {
   const handleSubmit = (event) => {
@@ -11,14 +11,9 @@ export const Login = () => {
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
         <Form
-          headerText={
-            <>
-              Welcome back <span className='accent'>.</span>
-            </>
-          }
-          inputItems={inputItems}
+          inputsData={inputsData.filter((item) => item.login)}
           handleSubmit={handleSubmit}
-          {...restFormProps}
+          {...loginFormProps}
         />
       </Card>
     </div>

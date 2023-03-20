@@ -1,33 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { IconButton } from '@mui/material';
+
 import { Input } from '../Input';
 import { Button } from '../Button';
-import { primaryButtonClass } from '../../res/styles';
+import { primaryButtonClass } from 'constants/styles';
 
-export const Form = ({ inputItems = [], headerText = '', buttonText = '', cta, handleSubmit }) => {
+export const Form = ({ inputsData = [], headerText = '', buttonText = '', cta, handleSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1 className='mb-12'>{headerText}</h1>
-      {inputItems.map((item) => {
-        return (
-          <Input
-            key={item.id}
-            iconLeft={item.iconLeft ? <item.iconLeft {...item.iconsStyle} /> : <></>}
-            iconRight={
-              item.iconRight ? (
-                <IconButton>
-                  <item.iconRight {...item.iconsStyle} />
-                </IconButton>
-              ) : (
-                <></>
-              )
-            }
-            type={item.type}
-            id={item.id}
-            placeholder={item.placeholder}
-          />
-        );
+      {inputsData.map((item) => {
+        return <Input key={item.id} {...item} />;
       })}
       <Button type='submit' {...primaryButtonClass}>
         {buttonText}
@@ -43,7 +26,7 @@ export const Form = ({ inputItems = [], headerText = '', buttonText = '', cta, h
 };
 
 Form.propTypes = {
-  inputItems: PropTypes.array,
+  inputsData: PropTypes.array,
   headerText: PropTypes.node,
   buttonText: PropTypes.string,
   cta: PropTypes.object,

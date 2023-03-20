@@ -1,5 +1,5 @@
 import React from 'react';
-import DoubleCheck from '../assets/double-check.svg';
+import DoubleCheck from 'assets/double-check.svg';
 
 export const UserCard = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { LeftPane, RightPane } from './Panes';
-import { FormSwiper } from '../../components/Form/FormSwiper';
+import { FormSwiper } from 'components/Form/FormSwiper';
 
 export const Card = ({ children }) => {
   return (
