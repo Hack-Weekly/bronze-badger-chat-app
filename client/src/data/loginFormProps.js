@@ -3,7 +3,7 @@ import React from 'react';
 export const loginFormProps = {
   cta: {
     text: "Don't have an account?",
-    link: '/register',
+    link: '/',
     linkText: 'Sign up',
   },
   buttonText: 'Sign In',
