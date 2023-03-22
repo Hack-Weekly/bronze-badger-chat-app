@@ -24,7 +24,7 @@ export const ChatInput = (props) => {
       <input
         ref={inputRef}
         onChange={handleChange}
-        className='pl-2 h-full outline-none border-none'
+        className='pl-2 h-full w-full outline-none border-none'
       ></input>
       <button type='submit'>
         <SendIcon className='text-indigo-400 min-h-[2rem] min-w-[2rem]' />
