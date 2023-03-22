@@ -28,6 +28,7 @@ async function bootstrap() {
         new ClassSerializerInterceptor(app.get(Reflector))
     );
 
+    app.enableCors();
     await app.listen(PORT);
 }
 bootstrap();
