@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Register, Login, ErrorPage } from 'pages';
+import { Register, Login, Chat, ErrorPage } from 'pages';
 
 import './App.css';
 
@@ -13,6 +13,11 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/chat',
+    element: <Chat />,
     errorElement: <ErrorPage />,
   },
 ]);
