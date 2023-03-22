@@ -7,8 +7,8 @@ export const ChatBubble = ({ msgType, text, timestamp, rcvd, consecutive }) => {
     <div
       className={
         msgType === 'sent'
-          ? 'bg-indigo-600 text-white w-fit md:max-w-[60%] max-w-[80%] p-1 pl-3 rounded-xl relative shadow-md'
-          : 'bg-indigo-100 text-indigo-600 w-fit md:max-w-[60%] max-w-[80%] p-1 pl-3 rounded-xl relative shadow-md'
+          ? 'bg-indigo-600 text-white w-fit md:max-w-[60%] max-w-[80%] p-1 pl-3 rounded-xl relative shadow-md mx-1 mb-2'
+          : 'bg-indigo-100 text-indigo-600 w-fit md:max-w-[60%] max-w-[80%] p-1 pl-3 rounded-xl relative shadow-md mx-1 mb-2'
       }
     >
       <div className='flex gap-3 flex-row'>
