@@ -1,16 +1,22 @@
 import { ChatBubble } from 'components/ChatBubble';
 import { ChatInput } from 'components/ChatInput';
+import ResponsiveDrawer from 'components/Drawer';
+import { Header } from 'components/Header';
 import React from 'react';
 
 export const Chat = () => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
   return (
     <div className='min-h-screen min-w-screen box-border'>
-      <header className='h-[10vh] max-md:h-[8vh] bg-indigo-600 flex justify-center items-center text-white'>
-        Chat App
-      </header>
+      <Header handleDrawerToggle={handleDrawerToggle} />
       <div className='flex min-w-screen box-border h-[90vh] max-md:h-[92vh]'>
-        <div className='w-[25vw] max-md:hidden bg-indigo-600 opacity-50'></div>
-        <div className='flex flex-col h-full max-md:w-[100vw] w-[75vw] p-4'>
+        <ResponsiveDrawer mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
+        <div className='flex flex-col h-full max-md:w-[100vw] w-full p-4'>
           <div className='h-full flex flex-col justify-end py-2'>
             <div className='flex w-full justify-start'>
               <ChatBubble
