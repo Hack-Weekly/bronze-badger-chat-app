@@ -4,11 +4,16 @@ import PropTypes from 'prop-types';
 import { Input } from '../Input';
 import { Button } from '../Button';
 import { primaryButtonClass } from 'constants/styles';
-import { useForm } from 'hooks/useForm';
 
-export const Form = ({ inputsData = [], headerText = '', buttonText = '', cta, handleSubmit }) => {
-  const { values, onChange } = useForm();
-
+export const Form = ({
+  inputsData = [],
+  headerText = '',
+  buttonText = '',
+  cta,
+  handleSubmit,
+  values,
+  onChange,
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <h1 className='mb-12'>{headerText}</h1>
@@ -34,4 +39,6 @@ Form.propTypes = {
   buttonText: PropTypes.string,
   cta: PropTypes.object,
   handleSubmit: PropTypes.func,
+  values: PropTypes.object,
+  onChange: PropTypes.func,
 };

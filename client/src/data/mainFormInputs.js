@@ -9,23 +9,23 @@ import {
   RestartAltIcon,
   RemoveRedEyeIcon,
 } from '../constants/icons';
-//TODO: check the actual name of the fields from the swagger.
+
 export const inputsData = [
   {
     type: 'text',
     id: 'username-input',
     placeholder: 'Username',
     register: true,
-    login: true,
     icons: {
       left: <FingerprintIcon {...iconsCustomStyle} />,
     },
-    name: 'userName',
+    name: 'username',
   },
   {
     type: 'email',
     id: 'email-input',
     placeholder: 'Email address',
+    login: true,
     register: true,
     icons: {
       left: <AlternateEmailIcon {...iconsCustomStyle} />,
@@ -61,6 +61,6 @@ export const inputsData = [
         </IconButton>
       ),
     },
-    name: 'confirmPassword',
+    name: 'passwordRepeat',
   },
 ];
