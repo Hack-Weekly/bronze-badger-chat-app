@@ -19,12 +19,12 @@ export const ChatInput = (props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl mb-4 hover:border-indigo-400 transition ease-in-out bg-white '
+      className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl hover:border-indigo-400 transition ease-in-out bg-white '
     >
       <input
         ref={inputRef}
         onChange={handleChange}
-        className='w-full pl-2 h-full outline-none border-none'
+        className='pl-2 h-full outline-none border-none'
       ></input>
       <button type='submit'>
         <SendIcon className='text-indigo-400 min-h-[2rem] min-w-[2rem]' />
