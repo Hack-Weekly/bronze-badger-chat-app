@@ -1,7 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
 
 #root {
   background: url('./assets/bckg-sm.svg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.user-1 {
+  background: url('./assets/user-1.jpg') no-repeat;
   background-size: cover;
 }
 

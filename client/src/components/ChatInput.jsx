@@ -19,7 +19,7 @@ export const ChatInput = (props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl hover:border-indigo-400 transition ease-in-out bg-white '
+      className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl hover:border-indigo-400 transition ease-in-out bg-white justify-self-end  '
     >
       <input
         ref={inputRef}
