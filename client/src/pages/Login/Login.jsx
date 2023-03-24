@@ -1,34 +1,53 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { useForm } from 'hooks/useForm';
 import { Form, Card } from 'components';
 import { inputsData, loginFormProps } from 'data';
-import { useForm } from 'hooks/useForm';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'http://localhost:8080',
+});
 
 export const Login = () => {
   const { values, onChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8080/login', values)
-      .then((res) => localStorage.setItem('token', res.access_token))
-      .then(() => navigate('/chat'))
-      .catch((err) => alert(err));
-  };
+
+    try {
+      const { access_token } = await apiClient.post('/login', values);
+      localStorage.setItem('token', access_token);
+      navigate('/chat');
+    } catch (err) {
+      alert(err);
+    }
+  }, [navigate, values]);
+
+  const filteredInputsData = useMemo(
+    () => inputsData.filter(({ login }) => login),
+    []
+  );
 
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
         <Form
-          inputsData={inputsData.filter((item) => item.login)}
+          inputsData={filteredInputsData}
           handleSubmit={handleSubmit}
-          {...loginFormProps}
           values={values}
           onChange={onChange}
+          {...loginFormProps}
         />
       </Card>
     </div>
   );
+};
+
+Login.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
