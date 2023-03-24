@@ -5,16 +5,23 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'hooks/useForm';
 
+const apiClient = axios.create({
+  baseURL: 'http://localhost:8080',
+});
+
 export const Register = () => {
   const { values, onChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8080/users', values)
-      .then(() => navigate('/login'))
-      .catch((err) => alert(err));
+
+    try {
+      await apiClient.post('/users', values);
+      navigate('/login');
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -30,4 +37,4 @@ export const Register = () => {
       </Card>
     </div>
   );
-}; 
+};
