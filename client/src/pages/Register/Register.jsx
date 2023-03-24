@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Form, Card } from 'components';
 import { inputsData, registerFormProps } from 'data';
 import axios from 'axios';
@@ -24,11 +24,16 @@ export const Register = () => {
     }
   };
 
+  const filteredInputsData = useMemo(
+    () => inputsData.filter(({ register }) => register),
+    []
+  );
+
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
         <Form
-          inputsData={inputsData.filter((item) => item.register)}
+          inputsData={filteredInputsData}
           handleSubmit={handleSubmit}
           {...registerFormProps}
           values={values}
