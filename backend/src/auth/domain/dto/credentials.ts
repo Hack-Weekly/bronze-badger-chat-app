@@ -1,13 +1,12 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsString, MinLength } from "class-validator";
+import {ApiProperty} from "@nestjs/swagger";
+import {IsEmail, IsString} from "class-validator";
 
 export class Credentials {
     @ApiProperty()
     @IsEmail()
-    email: string;
+    email: string
 
     @ApiProperty()
     @IsString()
-    @MinLength(5)
-    password: string;
-}
+    password: string
+} 
