@@ -1,25 +1,23 @@
 import React from 'react';
-import DoubleCheck from 'assets/double-check.svg';
+import { Avatar } from './Avatar';
 import PropTypes from 'prop-types';
 
-export const UserCard = ({ user }) => {
+export const UserCard = ({ user, content }) => {
   return (
-    <div className='flex items-center gap-2 w-full rounded-lg hover:bg-gray-100 relative p-2'>
-      <div className='rounded-full bg-sky-200 w-11 h-11 overflow-hidden'>
-        <img src={user.img} alt='' />
-      </div>
-      <div>
-        <span className='font-bold'>Alex Store</span>
-        <div className='flex items-center gap-1'>
-          <img className='w-4 text-blue-500' src={DoubleCheck} />
-          <span className='text-sm text-slate-400'>Lorem ipsum dolor sit amet,</span>
+    <div className='flex justify-between gap-3 w-full'>
+      <div className='flex gap-2'>
+        <Avatar img={user.img} alt={user.name} />
+        <div>
+          <span className='font-bold'>{user.name}</span>
+          <div className='flex items-center gap-1'>{content.main}</div>
         </div>
       </div>
-      <span className='absolute right-2 top-1 text-xs text-slate-400'>05:15</span>
+      {content.right}
     </div>
   );
 };
 
 UserCard.propTypes = {
   user: PropTypes.object,
+  content: PropTypes.object,
 };

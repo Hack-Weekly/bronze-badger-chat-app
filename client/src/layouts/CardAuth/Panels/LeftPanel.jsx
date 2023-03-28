@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const LeftPane = ({ children }) => {
+export const LeftPanel = ({ children }) => {
   return (
     <div className='card-left flex flex-col justify-center items-center md:w-1/2 py-14'>
       {children}
@@ -9,6 +9,6 @@ export const LeftPane = ({ children }) => {
   );
 };
 
-LeftPane.propTypes = {
+LeftPanel.propTypes = {
   children: PropTypes.element,
 };

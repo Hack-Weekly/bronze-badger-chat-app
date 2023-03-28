@@ -7,7 +7,7 @@ export const Input = ({ icons, type, placeholder, id, name, value, onChange, req
       <label htmlFor={id} className='sr-only'>
         {placeholder}
       </label>
-      <div className='flex justify-between items-center border-2 h-14 py-2 px-3 rounded-xl hover:border-indigo-400 transition ease-in-out'>
+      <div className='flex justify-between items-center border-2 h-11 px-3 rounded-xl hover:border-indigo-400 transition ease-in-out'>
         {icons?.left}
         <input
           className='w-full pl-2 outline-none border-none '
