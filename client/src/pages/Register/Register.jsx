@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,23 +7,32 @@ import { Card } from 'layouts';
 import { inputsData, registerFormProps } from 'data';
 import { useForm } from 'hooks/useForm';
 
+const apiClient = axios.create({
+  baseURL: 'http://localhost:8080',
+});
+
 export const Register = () => {
   const { values, onChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:8080/users', values)
-      .then(() => navigate('/login'))
-      .catch((err) => alert(err));
+
+    try {
+      await apiClient.post('/users', values);
+      navigate('/login');
+    } catch (err) {
+      alert(err);
+    }
   };
+
+  const filteredInputsData = useMemo(() => inputsData.filter(({ register }) => register), []);
 
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
         <FormAuth
-          inputsData={inputsData.filter((item) => item.register)}
+          inputsData={filteredInputsData}
           handleSubmit={handleSubmit}
           {...registerFormProps}
           values={values}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,24 +7,36 @@ import { Card } from 'layouts';
 import { inputsData, loginFormProps } from 'data';
 import { useForm } from 'hooks/useForm';
 
+const apiClient = axios.create({
+  baseURL: 'http://localhost:8080',
+});
+
 export const Login = () => {
   const { values, onChange } = useForm();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post('http://localhost:8080/login', values)
-      .then((res) => localStorage.setItem('token', res.access_token))
-      .then(() => navigate('/chat'))
-      .catch((err) => alert(err));
-  };
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+
+      try {
+        const { access_token } = await apiClient.post('/login', values);
+        localStorage.setItem('token', access_token);
+        navigate('/chat');
+      } catch (err) {
+        alert(err);
+      }
+    },
+    [navigate, values],
+  );
+
+  const filteredInputsData = useMemo(() => inputsData.filter(({ login }) => login), []);
 
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
         <FormAuth
-          inputsData={inputsData.filter((item) => item.login)}
+          inputsData={filteredInputsData}
           handleSubmit={handleSubmit}
           {...loginFormProps}
           values={values}
