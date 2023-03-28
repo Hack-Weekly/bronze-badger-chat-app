@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Input } from '../Input';
-import { Button } from '../Button';
+import { Button } from '../Buttons';
 import { primaryButtonClass } from 'constants/styles';
 
-export const Form = ({
+export const FormAuth = ({
   inputsData = [],
   headerText = '',
   buttonText = '',
@@ -43,7 +43,7 @@ export const Form = ({
   );
 };
 
-Form.propTypes = {
+FormAuth.propTypes = {
   inputsData: PropTypes.array,
   headerText: PropTypes.node,
   buttonText: PropTypes.string,

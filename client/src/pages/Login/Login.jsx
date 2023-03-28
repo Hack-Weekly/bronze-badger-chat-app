@@ -1,9 +1,11 @@
 import React from 'react';
-import { Form, Card } from 'components';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import { FormAuth } from 'components';
+import { Card } from 'layouts';
 import { inputsData, loginFormProps } from 'data';
 import { useForm } from 'hooks/useForm';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 export const Login = () => {
   const { values, onChange } = useForm();
@@ -21,7 +23,7 @@ export const Login = () => {
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
-        <Form
+        <FormAuth
           inputsData={inputsData.filter((item) => item.login)}
           handleSubmit={handleSubmit}
           {...loginFormProps}

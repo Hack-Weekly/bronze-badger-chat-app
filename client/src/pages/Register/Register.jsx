@@ -1,8 +1,10 @@
 import React from 'react';
-import { Form, Card } from 'components';
-import { inputsData, registerFormProps } from 'data';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+import { FormAuth } from 'components';
+import { Card } from 'layouts';
+import { inputsData, registerFormProps } from 'data';
 import { useForm } from 'hooks/useForm';
 
 export const Register = () => {
@@ -20,7 +22,7 @@ export const Register = () => {
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
-        <Form
+        <FormAuth
           inputsData={inputsData.filter((item) => item.register)}
           handleSubmit={handleSubmit}
           {...registerFormProps}
@@ -30,4 +32,4 @@ export const Register = () => {
       </Card>
     </div>
   );
-}; 
+};

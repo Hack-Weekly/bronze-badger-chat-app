@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SendIcon from '@mui/icons-material/Send';
+import { Button } from './Buttons';
 
 export const ChatInput = (props) => {
   const [text, setText] = useState('');
@@ -26,9 +27,9 @@ export const ChatInput = (props) => {
         onChange={handleChange}
         className='pl-2 h-full w-full outline-none border-none'
       ></input>
-      <button type='submit'>
+      <Button type='submit'>
         <SendIcon className='text-indigo-400 min-h-[2rem] min-w-[2rem]' />
-      </button>
+      </Button>
     </form>
   );
 };
