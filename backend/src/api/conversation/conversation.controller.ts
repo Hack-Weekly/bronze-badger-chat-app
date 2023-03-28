@@ -25,7 +25,7 @@ export class ConversationController {
     const recipientId = createConversationDto.recipientId;
     const currentUserId = currentUser.userId;
 
-    const conversation = await this.conversationService.findConversation(
+    const conversation = await this.conversationService.findConversationByIdAndUserId(
       currentUserId,
       recipientId,
     );
