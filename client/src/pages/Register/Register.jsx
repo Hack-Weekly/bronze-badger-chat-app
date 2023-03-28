@@ -26,7 +26,10 @@ export const Register = () => {
     }
   };
 
-  const filteredInputsData = useMemo(() => inputsData.filter(({ register }) => register), []);
+  const filteredInputsData = useMemo(
+    () => inputsData.filter(({ register }) => register),
+    []
+  );
 
   return (
     <div className='flex min-h-screen justify-center items-center'>

@@ -9,4 +9,4 @@ export class Credentials {
     @ApiProperty()
     @IsString()
     password: string
-}
+} 
