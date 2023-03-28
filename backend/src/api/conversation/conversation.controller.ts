@@ -6,7 +6,9 @@ import { Types, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Message, MessageSchema } from '../../conversation/domain/entity/message';
 import { ConversationService } from '../../conversation/service/conversation.service';
-import { CurrentUser } from '../../auth/util/currentUser.decorator'; // Import the CurrentUser decorator
+import { CurrentUser } from '../../auth/util/currentUser.decorator';
+import { ParseObjectIdPipe } from '../../common/pipes/parse-object-id.pipe';
+import { Get } from '@nestjs/common';
 
 @ApiTags('conversations')
 @Controller('conversations')
@@ -22,7 +24,7 @@ export class ConversationController {
     @Body() createConversationDto: CreateConversationDto,
     @CurrentUser() currentUser,
   ) {
-    const recipientId = createConversationDto.recipientId;
+    const recipientId = new Types.ObjectId(createConversationDto.recipientId);
     const currentUserId = currentUser.userId;
 
     const conversation = await this.conversationService.findConversationByIdAndUserId(
@@ -33,10 +35,10 @@ export class ConversationController {
       throw new HttpException('Conversation already exists', HttpStatus.BAD_REQUEST);
     }
 
-    const newConversation = await this.conversationService.createConversation(
+    const newConversation = await this.conversationService.createConversation([
       currentUserId,
       recipientId,
-    );
+    ]);
     return newConversation;
   }
 
