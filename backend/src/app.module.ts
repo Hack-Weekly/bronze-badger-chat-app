@@ -1,12 +1,11 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ApiModule } from './api/api.module';
-import { IoAdapter } from '@nestjs/platform-socket.io'; // needs a re-check added socket.io
-import { IoModule } from '@nestjs/platform-socket.io';
-import * as socketio from 'socket.io';
-import { AppGateway } from './app.gateway'; // needs a re-check added app.gateway
+import { IoAdapter } from '@nestjs/platform-socket.io';
+import { Server, ServerOptions } from 'socket.io';
+import { AppGateway } from './app.gateway';
 
 export class CustomSocketAdapter extends IoAdapter {
   createIOServer(port: number, options?: ServerOptions): Server {
@@ -15,7 +14,7 @@ export class CustomSocketAdapter extends IoAdapter {
     io.origins('*:*');
     return server;
   }
-}   // needs a re-check
+}
 
 @Module({
   imports: [
@@ -30,17 +29,12 @@ export class CustomSocketAdapter extends IoAdapter {
       inject: [ConfigService],
     }),
     AuthModule,
-    ApiModule,
-    IoModule.forRoot({
-      adapter: new CustomSocketAdapter(),
-    }),
+    ApiModule,   
   ],
   providers: [AppGateway],
 })
-export class AppModule {   // needs a re-check
+export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-  consumer
-    .apply(MyMiddleware)
-    .forRoutes({ path: '*', method: RequestMethod.ALL });  
+    // implement middleware here
   }
-}  
+}
