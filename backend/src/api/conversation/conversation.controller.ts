@@ -10,6 +10,7 @@ import {
     Post,
     Query,
     UseGuards,
+    Inject,
     Injectable
 } from '@nestjs/common';
 import {JwtAuthGuard} from '../../auth/guard/jwt.guard';
@@ -34,8 +35,16 @@ import {Types, Model} from "mongoose";
 import {InjectModel} from '@nestjs/mongoose';
 import { Message, MessageSchema } from '../conversation/domain/entity/message';
 import {ParseObjectIdPipe} from "../../validator/parseObjectId.pipe";
+import { ConversationService } from '../conversation/service/conversation.service';
 
 @ApiTags('conversations')
+@Controller('conversations')
+export class ConversationController {
+  constructor(
+    private conversationService: ConversationService,
+    @InjectModel('Message') private readonly messageModel: Model<Message>
+  ) {}
+
 @Controller('conversations')
 export class ConversationController {
     constructor(
