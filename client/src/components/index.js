@@ -1,10 +1,10 @@
 export { FormAuth } from './FormAuth/Form.auth';
-export { Input } from './Input';
-export { Button } from './Buttons/Button.default';
+export { Avatar } from './Avatar';
+export { Button } from './Button';
 export { Chat } from './Chat';
 export { ChatBubble } from './ChatBubble';
-export { SearchForm } from './SearchForm';
-export { ChatsList } from './ChatsList';
+export { ChatPreview } from './ChatPreview';
 export { ChatInput } from './ChatInput';
+export { ChatsList } from './ChatsList';
+export { SearchForm } from './SearchForm';
 export { UserCard } from './UserCard';
-export { AdminCard } from './AdminCard';

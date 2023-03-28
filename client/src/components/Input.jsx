@@ -15,7 +15,7 @@ export const Input = ({ icons, type, placeholder, id, name, value, onChange, req
           id={id}
           name={name}
           placeholder={placeholder}
-          value={value || ''}
+          value={value}
           onChange={onChange}
           required={required}
         />

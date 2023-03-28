@@ -1,6 +1,7 @@
 import React from 'react';
 import { SearchForm, ChatsList } from 'components';
-import { ButtonAdd } from 'components/Buttons';
+import { Button } from 'components/Button';
+import { AddIcon } from 'constants/icons';
 import JohnDoe from 'assets/user-2.jpg';
 
 export const LeftPanel = () => {
@@ -25,7 +26,9 @@ export const LeftPanel = () => {
       ) : (
         <p className='h-full m-auto text-slate-500'>Start a new Chat</p>
       )}
-      <ButtonAdd />
+      <Button options={{ sx: { borderRadius: '50%', width: '50px', height: '50px' } }}>
+        <AddIcon />
+      </Button>
     </div>
   );
 };

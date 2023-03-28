@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Input } from '../Input';
-import { Button } from '../Buttons';
-import { primaryButtonClass } from 'constants/styles';
+import { Button } from 'components';
+import { authBtnStyles } from 'constants/styles';
 
 export const FormAuth = ({
   inputsData = [],
@@ -30,8 +30,8 @@ export const FormAuth = ({
           );
         })}
       </div>
-      <Button type='submit' {...primaryButtonClass}>
-        {buttonText}
+      <Button type='submit' options={{ sx: authBtnStyles }}>
+        <span> {buttonText}</span>
       </Button>
       <p className='text-sm ml-2 text-gray-600 mt-4'>
         {cta.text}{' '}

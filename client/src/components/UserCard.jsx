@@ -7,12 +7,16 @@ export const UserCard = ({ user, content }) => {
     <div className='flex justify-between gap-3 w-full'>
       <div className='flex gap-2'>
         <Avatar img={user.img} alt={user.name} />
-        <div>
-          <span className='font-bold'>{user.name}</span>
-          <div className='flex items-center gap-1'>{content.main}</div>
-        </div>
+        {user?.name && (
+          <div className='text-left'>
+            <span className='font-bold'>{user.name}</span>
+            {content?.main && (
+              <span className='flex items-center gap-1 text-sm text-slate-400'>{content.main}</span>
+            )}
+          </div>
+        )}
       </div>
-      {content.right}
+      {content?.right}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-import { DoneIcon, DoneAllIcon } from 'constants/icons';
 import PropTypes from 'prop-types';
+import { DoneIcon, DoneAllIcon } from 'constants/icons';
 
 export const ChatBubble = ({ msg }) => {
   const bubbleClass = {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ChatInput, UserCard, Chat } from 'components';
-import { ButtonOptions } from 'components/Buttons';
+import { Button } from 'components/Button';
+import { MoreHorizIcon } from 'constants/icons';
 import JohnDoe from 'assets/user-2.jpg';
 
 export const RightPanel = () => {
@@ -16,14 +17,15 @@ export const RightPanel = () => {
         <UserCard
           user={user}
           content={{
-            main: (
-              <span className='text-sm text-slate-400'>
-                {user.isActive ? 'Active' : 'Offline'} now
-              </span>
-            ),
+            main: `${user.isActive ? 'Active' : 'Offline'} now`,
           }}
         />
-        <ButtonOptions />
+        <Button
+          options={{ sx: { borderRadius: '50%', width: '40px', height: '40px' } }}
+          isLight={true}
+        >
+          <MoreHorizIcon />
+        </Button>
       </div>
       <Chat />
       <ChatInput />
