@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseObjectIdPipe,
-  Put,
-  UseGuards,
-  Inject,
-} from '@nestjs/common';
+import { Body, Controller, HttpException, HttpStatus, Param, Put, UseGuards, Inject } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guard/jwt.guard';
 import { CreateConversationDto } from '../../conversation/domain/dto/create-conversation.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -16,6 +6,7 @@ import { Types, Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Message, MessageSchema } from '../../conversation/domain/entity/message';
 import { ConversationService } from '../../conversation/service/conversation.service';
+import { CurrentUser } from '../../auth/util/currentUser.decorator'; // Import the CurrentUser decorator
 
 @ApiTags('conversations')
 @Controller('conversations')
@@ -51,7 +42,7 @@ export class ConversationController {
 
   @Get(':id/messages')
   async getMessagesByConversationId(
-    @Param('id', new ParseObjectIdPipe()) conversationId: Types.ObjectId,
+    @Param('id', ParseObjectIdPipe) conversationId: Types.ObjectId,
   ): Promise<Message[]> {
     return await this.messageModel.find({ conversation: conversationId }).exec();
   }
