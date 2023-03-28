@@ -32,7 +32,7 @@ import {Pageable} from "../../util/pageable";
 import {ValidationErrorResponse} from "../../util/validationErrorResponse";
 import {Types, Model} from "mongoose";
 import {InjectModel} from '@nestjs/mongoose';
-import {Message} from './message.model';
+import { Message, MessageSchema } from '../conversation/domain/entity/message';
 import {ParseObjectIdPipe} from "../../validator/parseObjectId.pipe";
 
 @ApiTags('conversations')
