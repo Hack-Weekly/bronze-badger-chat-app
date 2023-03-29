@@ -10,8 +10,8 @@ export class AppGateway {
   @WebSocketServer()
   server: Server;
 
-  @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
+  @SubscribeMessage('message')  // Needs implementation
+  handleMessage(client: any, payload: any): string {     
     return 'Example of AppGateway';
   }
 }
