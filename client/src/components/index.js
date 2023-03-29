@@ -1,7 +1,10 @@
-export { Form } from './Form/Form';
-export { Card } from './Card/Card';
-export { Input } from './Input';
+export { FormAuth } from './FormAuth/Form.auth';
+export { Avatar } from './Avatar';
 export { Button } from './Button';
+export { Chat } from './Chat';
 export { ChatBubble } from './ChatBubble';
+export { ChatPreview } from './ChatPreview';
 export { ChatInput } from './ChatInput';
+export { ChatsList } from './ChatsList';
+export { SearchForm } from './SearchForm';
 export { UserCard } from './UserCard';

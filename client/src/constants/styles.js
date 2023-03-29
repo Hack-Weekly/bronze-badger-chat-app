@@ -1,4 +1,4 @@
-import { ICONS_BASE_COLOR, PRIMARY_BUTTON_CLASS } from 'constants';
+import { ICONS_BASE_COLOR } from 'constants';
 
 export const iconsCustomStyle = {
   sx: {
@@ -6,6 +6,10 @@ export const iconsCustomStyle = {
   },
 };
 
-export const primaryButtonClass = {
-  className: PRIMARY_BUTTON_CLASS,
+export const authBtnStyles = {
+  fontSize: '18px',
+  border: 'solid 1px transparent',
+  borderRadius: '0.5rem',
+  width: '100%',
+  '&:hover': { border: 'solid 1px #474bff', color: '#474bff', background: 'white' },
 };

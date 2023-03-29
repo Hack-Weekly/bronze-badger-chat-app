@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { Form, Card } from 'components';
+import { FormAuth } from 'components';
+import { Card } from 'layouts';
 import { inputsData, registerFormProps } from 'data';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -24,15 +25,12 @@ export const Register = () => {
     }
   };
 
-  const filteredInputsData = useMemo(
-    () => inputsData.filter(({ register }) => register),
-    []
-  );
+  const filteredInputsData = useMemo(() => inputsData.filter(({ register }) => register), []);
 
   return (
     <div className='flex min-h-screen justify-center items-center'>
       <Card>
-        <Form
+        <FormAuth
           inputsData={filteredInputsData}
           handleSubmit={handleSubmit}
           {...registerFormProps}

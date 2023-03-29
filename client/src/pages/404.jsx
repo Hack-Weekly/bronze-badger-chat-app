@@ -1,7 +1,7 @@
-import { Link, useRouteError } from 'react-router-dom';
-import { Button } from 'components';
-import { primaryButtonClass } from 'constants/styles';
 import React from 'react';
+import { Link, useRouteError } from 'react-router-dom';
+import { Button } from 'components/Button';
+import { authBtnStyles } from 'constants/styles';
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -15,8 +15,8 @@ export default function ErrorPage() {
         <i>{error.statusText || error.message}</i>
       </p>
       <Link to='/'>
-        <Button {...primaryButtonClass}>
-          <span className='p-2'>Home Page</span>
+        <Button options={{ sx: { ...authBtnStyles, padding: '0.4rem 2rem' } }}>
+          <span>Home</span>
         </Button>
       </Link>
     </div>
