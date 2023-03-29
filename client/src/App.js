@@ -1,6 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Register, Login, Chat, ErrorPage } from 'pages';
+import { AuthProvider, RequireAuth } from 'react-auth-kit';
+
 
 import './App.css';
 
@@ -17,13 +19,21 @@ const router = createBrowserRouter([
   },
   {
     path: '/chat',
-    element: <Chat />,
+    element: <RequireAuth loginPath='/login'><Chat /></RequireAuth>,
     errorElement: <ErrorPage />,
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider
+      authType='cookie'
+      authName='_auth'
+      cookieDomain={window.location.hostname}
+      cookieSecur={false}>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
