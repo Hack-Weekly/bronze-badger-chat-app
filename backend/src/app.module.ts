@@ -16,6 +16,8 @@ export class CustomSocketAdapter extends IoAdapter {
   }
 }
 
+// socket.io not implemented 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
