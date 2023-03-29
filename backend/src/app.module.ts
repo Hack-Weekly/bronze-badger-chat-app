@@ -17,6 +17,7 @@ export class CustomSocketAdapter extends IoAdapter {
 }
 
 // socket.io not implemented 
+// the code needs a re-check
 
 @Module({
   imports: [
