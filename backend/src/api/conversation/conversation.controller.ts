@@ -11,6 +11,10 @@ import { Conversation } from '../../conversation/domain/entity/conversation';
 import { CreateMessageDTO } from '../../conversation/domain/dto/createMessageDTO';
 import {JwtAuthGuard} from '../../auth/guard/jwt.guard';
 
+// Needs a re-check 
+// messageModel need to be implemented 
+// Needs improvement 
+
 @ApiTags('conversations')
 @Controller('conversations')
 export class ConversationController {
