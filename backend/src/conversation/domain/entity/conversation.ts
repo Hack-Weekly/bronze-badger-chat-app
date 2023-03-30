@@ -1,10 +1,11 @@
 import {BaseDBObject} from '../../../util/baseDbObject';
 import mongoose, {Document} from 'mongoose';
 import {ApiProperty} from '@nestjs/swagger';
-import {Prop, SchemaFactory} from '@nestjs/mongoose';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 
 export type ConversationDocument = Conversation & Document;
 
+@Schema({timestamps: true})
 export class Conversation extends BaseDBObject {
     @ApiProperty()
     @Prop({type: [mongoose.Schema.Types.ObjectId], required: true})

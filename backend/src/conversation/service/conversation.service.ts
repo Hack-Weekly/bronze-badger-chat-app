@@ -1,10 +1,11 @@
 import {BadRequestException, Injectable, UnauthorizedException} from '@nestjs/common';
-import {Model, Types} from 'mongoose';
+import mongoose, {Model, Types} from 'mongoose';
 import {CreateMessageDTO} from '../domain/dto/createMessageDTO';
 import {InjectModel} from '@nestjs/mongoose';
 import {Conversation, ConversationDocument} from '../domain/entity/conversation';
 import {Message, MessageDocument} from '../domain/entity/message';
 import {ConversationUserMeta, ConversationUserMetaDocument} from '../domain/entity/conversationUserMeta';
+import {CreateConversationDto} from '../domain/dto/createConversationDTO';
 
 @Injectable()
 export class ConversationService {
@@ -33,9 +34,13 @@ export class ConversationService {
             .exec();
     }
 
-    async createConversation(userIds: Types.ObjectId[]) {
-        const conversation = new this.conversationModel({userIds});
-        await conversation.save();
+    async createConversation(
+        createConversationDto: CreateConversationDto,
+        currentUserId: Types.ObjectId
+    ): Promise<Types.ObjectId> {
+        const ids = [...createConversationDto.userIds, currentUserId];
+        const conversation: ConversationDocument = await this.conversationModel.create({userIds: ids});
+        return conversation._id as Types.ObjectId;
     }
 
     async updateConversationUserMeta(conversationId: Types.ObjectId, userId: Types.ObjectId) {

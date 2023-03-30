@@ -4,7 +4,8 @@ import {ConfigService} from '@nestjs/config';
 import {useRequestLogging} from './util/logger';
 import * as mongoose from 'mongoose';
 import {BadRequestException, ClassSerializerInterceptor, ValidationPipe} from '@nestjs/common';
-import {useSwagger} from "./util/swagger";
+import {useSwagger} from './util/swagger';
+import {SocketIOAdapter} from './socket/socketAdapter';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -15,18 +16,17 @@ async function bootstrap() {
 
     mongoose.set('debug', DEBUG_MODE);
     useRequestLogging(app);
-    useSwagger(app)
+    useSwagger(app);
 
+    app.useWebSocketAdapter(new SocketIOAdapter(app));
     app.useGlobalPipes(
         new ValidationPipe({
             transform: true,
-            exceptionFactory: (errors) => new BadRequestException(errors)
+            exceptionFactory: (errors) => new BadRequestException(errors),
         })
     );
 
-    app.useGlobalInterceptors(
-        new ClassSerializerInterceptor(app.get(Reflector))
-    );
+    app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
     app.enableCors();
     await app.listen(PORT);

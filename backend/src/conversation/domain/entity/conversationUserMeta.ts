@@ -1,17 +1,22 @@
-import {BaseDBObject} from "../../../util/baseDbObject";
-import mongoose, {Document} from "mongoose";
-import {ApiProperty} from "@nestjs/swagger";
-import {Prop, SchemaFactory} from "@nestjs/mongoose";
+import {BaseDBObject} from '../../../util/baseDbObject';
+import mongoose, {Document} from 'mongoose';
+import {ApiProperty} from '@nestjs/swagger';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 
 export type ConversationUserMetaDocument = ConversationUserMeta & Document;
 
+@Schema({timestamps: true})
 export class ConversationUserMeta extends BaseDBObject {
     @ApiProperty()
-    @Prop({ required: true})
+    @Prop({required: true})
     conversationId: mongoose.Schema.Types.ObjectId;
 
     @ApiProperty()
-    @Prop({ required: true})
+    @Prop({default: false})
+    typing: boolean;
+
+    @ApiProperty()
+    @Prop({required: true})
     userId: mongoose.Schema.Types.ObjectId;
 }
 

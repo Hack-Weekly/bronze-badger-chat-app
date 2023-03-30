@@ -1,8 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import {ApiProperty} from '@nestjs/swagger';
+import {Transform} from 'class-transformer';
+import {Types} from 'mongoose';
+import {IsMongoIdObject} from '../../../validator/isMongoObjectId';
 
 export class CreateConversationDto {
-  @ApiProperty()
-  @IsString()
-  recipientId: string;
+    @ApiProperty()
+    @IsMongoIdObject({each: true})
+    @Transform((value) => {
+        return value.value.map((id) => {
+            if (Types.ObjectId.isValid(id)) {
+                return new Types.ObjectId(id);
+            }
+
+            return id;
+        });
+    })
+    userIds: Types.ObjectId[];
 }

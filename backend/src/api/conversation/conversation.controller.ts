@@ -1,78 +1,61 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Put, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { Types, Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
-import { Message, MessageSchema } from '../../conversation/domain/entity/message';
-import { ConversationService } from '../../conversation/service/conversation.service';
-import { CurrentUser } from '../../auth/util/currentUser.decorator';
-import { ParseObjectIdPipe } from '../../common/pipes/parse-object-id.pipe';
-import { CreateConversationDto } from '../../conversation/domain/dto/create-conversation.dto';
-import { Conversation } from '../../conversation/domain/entity/conversation';
-import { CreateMessageDTO } from '../../conversation/domain/dto/createMessageDTO';
+import {Body, Controller, Get, Param, Post, Put, UseGuards} from '@nestjs/common';
+import {ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse} from '@nestjs/swagger';
+import {Types} from 'mongoose';
+import {Message} from '../../conversation/domain/entity/message';
+import {ConversationService} from '../../conversation/service/conversation.service';
+import {CurrentUser} from '../../auth/util/currentUser.decorator';
+import {ParseObjectIdPipe} from '../../common/pipes/parse-object-id.pipe';
+import {Conversation} from '../../conversation/domain/entity/conversation';
+import {CreateMessageDTO} from '../../conversation/domain/dto/createMessageDTO';
 import {JwtAuthGuard} from '../../auth/guard/jwt.guard';
+import {CreateConversationDto} from '../../conversation/domain/dto/createConversationDTO';
 
 @ApiTags('conversations')
-@Controller('conversations')
+@ApiBearerAuth()
+@ApiUnauthorizedResponse()
+@UseGuards(JwtAuthGuard)
+@Controller()
 export class ConversationController {
-  constructor(
-    private readonly conversationService: ConversationService,
-    @InjectModel('Message') private readonly messageModel: Model<Message>,
-  ) {}
+    constructor(private readonly conversationService: ConversationService) {}
 
-  @Put()
-  @UseGuards(JwtAuthGuard)
-  async createConversation(
-    @Body() createConversationDto: CreateConversationDto,
-    @CurrentUser() currentUser,
-  ) {
-    const recipientId = new Types.ObjectId(createConversationDto.recipientId);
-    const currentUserId = currentUser.userId;
+    @ApiCreatedResponse({type: String, description: 'Return created object id'})
+    @Post()
+    async createConversation(
+        @Body() createConversationDto: CreateConversationDto,
+        @CurrentUser() currentUser
+    ): Promise<string> {
+        const currentUserId = new Types.ObjectId(currentUser.userId);
 
-    const conversation = await this.conversationService.findConversationByIdAndUserId(
-      currentUserId,
-      recipientId,
-    );
-    if (conversation) {
-      throw new HttpException('Conversation already exists', HttpStatus.BAD_REQUEST);
+        const id = await this.conversationService.createConversation(createConversationDto, currentUserId);
+        return id.toString();
     }
 
-    const newConversation = await this.conversationService.createConversation([
-      currentUserId,
-      recipientId,
-    ]);
-    return newConversation;
-  }
+    @ApiOkResponse({type: [Message], description: 'Returns conversation messages'})
+    @Get('/:id/messages')
+    async getMessagesByConversationId(
+        @Param('id', ParseObjectIdPipe) conversationId: Types.ObjectId
+    ): Promise<Message[]> {
+        return await this.conversationService.getMessagesByConversationId(conversationId);
+    }
 
-  @Get(':id/messages')
-  async getMessagesByConversationId(
-    @Param('id', ParseObjectIdPipe) conversationId: Types.ObjectId,
-  ): Promise<Message[]> {
-    return await this.messageModel.find({ conversation: conversationId }).exec();
-  }
+    // TODO should return whole users instead of userIds - ConversationDTO
+    @ApiOkResponse({type: [Conversation], description: 'Returns current user conversation'})
+    @Get()
+    async getUserConversations(@CurrentUser() user): Promise<Conversation[]> {
+        return await this.conversationService.getUserConversations(user.userId);
+    }
 
-  @Get('user/:id/conversations')
-  async getUserConversations(
-    @Param('id', ParseObjectIdPipe) userId: Types.ObjectId,
-  ): Promise<Conversation[]> {
-    return await this.conversationService.getUserConversations(userId);
-  }
+    // TODO updateUserMetaDTO
+    @Put('/:id/updateUserMeta')
+    async updateConversationUserMeta(
+        @Param('id', ParseObjectIdPipe) conversationId: Types.ObjectId,
+        @CurrentUser('userId') user
+    ): Promise<void> {
+        await this.conversationService.updateConversationUserMeta(conversationId, user.userId);
+    }
 
-  @Put(':conversationId/users/:userId/meta')
-  async updateConversationUserMeta(
-    @Param('conversationId', ParseObjectIdPipe) conversationId: Types.ObjectId,
-    @Param('userId', ParseObjectIdPipe) userId: Types.ObjectId,
-  ): Promise<void> {
-    await this.conversationService.updateConversationUserMeta(conversationId, userId);
-  }
-
-  @Put(':conversationId/messages')
-  async createMessage(
-  @Param('conversationId', ParseObjectIdPipe) conversationId: Types.ObjectId,
-  @Body() createMessageDto: CreateMessageDTO,
-  @CurrentUser() currentUser,
-): Promise<Message> {
-  const userId = currentUser.userId;
-  createMessageDto.conversationId = conversationId.toString();
-  return await this.conversationService.createMessage(createMessageDto, userId);
-  }
+    @Post('message')
+    async createMessage(@Body() createMessageDto: CreateMessageDTO, @CurrentUser() currentUser): Promise<Message> {
+        return await this.conversationService.createMessage(createMessageDto, currentUser.userId);
+    }
 }

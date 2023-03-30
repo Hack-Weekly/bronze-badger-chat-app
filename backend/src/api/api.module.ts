@@ -1,7 +1,7 @@
 import {Module} from '@nestjs/common';
 import {RouterModule, Routes} from '@nestjs/core';
 import {AuthControllerModule} from './auth/authController.module';
-import {ConversationModule} from './conversation/conversation.module';
+import {ConversationControllerModule} from './conversation/conversation.module';
 
 const routes: Routes = [
     {
@@ -10,11 +10,11 @@ const routes: Routes = [
     },
     {
         path: '/conversations',
-        module: ConversationModule,
+        module: ConversationControllerModule,
     },
 ];
 
 @Module({
-    imports: [RouterModule.register(routes), AuthControllerModule, ConversationModule],
+    imports: [RouterModule.register(routes), AuthControllerModule, ConversationControllerModule],
 })
 export class ApiModule {}
